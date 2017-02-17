@@ -7,6 +7,8 @@
 #define FAST_MEDIAN_LIB_CPP
 
 #include <algorithm>
+#include <cstdint>
+
 #include "mex.h"
 #include "nth_element_lib.cpp"
 
@@ -65,46 +67,44 @@ mxArray *run_fast_median(mxArray *inarr) {
 
   switch (mxGetClassID(inarr)) {
     case mxDOUBLE_CLASS:
-      outarr = fast_median((double *) indata, inarr);
+      outarr = fast_median(static_cast<double*>(indata), inarr);
       break;
 
     case mxSINGLE_CLASS:
-      outarr = fast_median((float *) indata, inarr);
+      outarr = fast_median(static_cast<float*>(indata), inarr);
       break;
 
     case mxINT8_CLASS:
-      outarr = fast_median((signed char *) indata, inarr);
+      outarr = fast_median(static_cast<std::int8_t*>(indata), inarr);
       break;
 
     case mxUINT8_CLASS:
-      outarr = fast_median((unsigned char *) indata, inarr);
+      outarr = fast_median(static_cast<std::uint8_t*>(indata), inarr);
       break;
 
     case mxINT16_CLASS:
-      outarr = fast_median((signed short *) indata, inarr);
+      outarr = fast_median(static_cast<std::int16_t*>(indata), inarr);
       break;
 
     case mxUINT16_CLASS:
-      outarr = fast_median((unsigned short *) indata, inarr);
+      outarr = fast_median(static_cast<std::uint16_t*>(indata), inarr);
       break;
 
     case mxINT32_CLASS:
-      outarr = fast_median((signed int *) indata, inarr);
+      outarr = fast_median(static_cast<std::int32_t*>(indata), inarr);
       break;
 
     case mxUINT32_CLASS:
-      outarr = fast_median((unsigned int *) indata, inarr);
+      outarr = fast_median(static_cast<std::uint32_t*>(indata), inarr);
+      break;
+    
+    case mxINT64_CLASS:
+      outarr = fast_median(static_cast<std::int64_t*>(indata), inarr);
       break;
 
-    // Uncomment these if int64 is needed, but note that on some compilers
-    // it's called "__int64" instead of "long long"
-    //case mxINT64_CLASS:
-      //outarr = fast_median((signed long long *) indata, inarr);
-      //break;
-
-    //case mxUINT64_CLASS:
-      //outarr = fast_median((unsigned long long *) indata, inarr);
-      //break;
+    case mxUINT64_CLASS:
+      outarr = fast_median(static_cast<std::uint64_t*>(indata), inarr);
+      break;
 
     default:
       mexErrMsgIdAndTxt("Numerical:fast_median:prhs", "Unrecognized numeric array type.");

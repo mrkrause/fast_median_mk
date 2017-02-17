@@ -7,7 +7,7 @@
 #define NTH_ELEMENT_LIB_CPP
 
 #include <algorithm>
-
+#include <cstdint>
 
 // This runs on data inplace!
 template <typename T> 
@@ -32,46 +32,44 @@ void run_nth_element(mxArray *inarr, mwIndex rank, mwSize ncols, mwSize nrows) {
 
   switch (mxGetClassID(inarr)) {
     case mxDOUBLE_CLASS:
-      nth_element_cols((double *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<double*>(indata), rank, ncols, nrows);
       break;
 
     case mxSINGLE_CLASS:
-      nth_element_cols((float *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<float*>(indata), rank, ncols, nrows);
       break;
 
     case mxINT8_CLASS:
-      nth_element_cols((signed char *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::int8_t*>(indata), rank, ncols, nrows);
       break;
 
     case mxUINT8_CLASS:
-      nth_element_cols((unsigned char *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::uint8_t*>(indata), rank, ncols, nrows);
       break;
 
     case mxINT16_CLASS:
-      nth_element_cols((signed short *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::int16_t*>(indata), rank, ncols, nrows);
       break;
 
     case mxUINT16_CLASS:
-      nth_element_cols((unsigned short *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::uint16_t*>(indata), rank, ncols, nrows);
       break;
 
     case mxINT32_CLASS:
-      nth_element_cols((signed int *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::int32_t*>(indata), rank, ncols, nrows);
       break;
 
     case mxUINT32_CLASS:
-      nth_element_cols((unsigned int *) indata, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::uint32_t*>(indata), rank, ncols, nrows);
       break;
 
-    // Uncomment these if int64 is needed, but note that on some compilers
-    // it's called "__int64" instead of "long long"
-    //case mxINT64_CLASS:
-      //nth_element_cols((signed long long *) indata, rank, ncols, nrows);
-      //break;
+    case mxINT64_CLASS:
+      nth_element_cols(static_cast<std::int64_t*>(indata), rank, ncols, nrows);
+      break;
 
-    //case mxUINT64_CLASS:
-      //nth_element_cols((unsigned long long *) indata, rank, ncols, nrows);
-      //break;
+    case mxUINT64_CLASS:
+      nth_element_cols(static_cast<std::uint64_t*>(indata), rank, ncols, nrows);
+      break;
 
     default:
       mexErrMsgIdAndTxt("Numerical:nth_element:prhs", "Unrecognized numeric array type.");
@@ -124,46 +122,44 @@ void run_nth_element(mxArray *inarr, unsigned int *indices, mwIndex rank, mwSize
 
   switch (mxGetClassID(inarr)) {
     case mxDOUBLE_CLASS:
-      nth_element_cols((double *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<double*>(indata), indices, rank, ncols, nrows);
       break;
 
     case mxSINGLE_CLASS:
-      nth_element_cols((float *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<float*>(indata), indices, rank, ncols, nrows);
       break;
 
     case mxINT8_CLASS:
-      nth_element_cols((signed char *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::int8_t*>(indata), indices, rank, ncols, nrows);
       break;
 
     case mxUINT8_CLASS:
-      nth_element_cols((unsigned char *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::uint8_t*>(indata), indices, rank, ncols, nrows);
       break;
 
     case mxINT16_CLASS:
-      nth_element_cols((signed short *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::int16_t*>(indata), indices, rank, ncols, nrows);
       break;
 
     case mxUINT16_CLASS:
-      nth_element_cols((unsigned short *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::uint16_t*>(indata), indices, rank, ncols, nrows);
       break;
 
     case mxINT32_CLASS:
-      nth_element_cols((signed int *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::int32_t*>(indata), indices, rank, ncols, nrows);
       break;
 
     case mxUINT32_CLASS:
-      nth_element_cols((unsigned int *) indata, indices, rank, ncols, nrows);
+      nth_element_cols(static_cast<std::uint32_t*>(indata), indices, rank, ncols, nrows);
       break;
 
-    // Uncomment these if int64 is needed, but note that on some compilers
-    // it's called "__int64" instead of "long long"
-    //case mxINT64_CLASS:
-      //nth_element_cols((signed long long *) indata, indices, rank, ncols, nrows);
-      //break;
+    case mxINT64_CLASS:
+      nth_element_cols(static_cast<std::int64_t*>(indata), indices, rank, ncols, nrows);
+      break;
 
-    //case mxUINT64_CLASS:
-      //nth_element_cols((unsigned long long *) indata, indices, rank, ncols, nrows);
-      //break;
+    case mxUINT64_CLASS:
+      nth_element_cols(static_cast<std::uint64_t*>(indata), indices, rank, ncols, nrows);
+      break;
 
     default:
       mexErrMsgIdAndTxt("Numerical:nth_element:prhs", "Unrecognized numeric array type.");

@@ -23,14 +23,10 @@
 %    the "upper" and "lower" median.
 %
 %    Also emulating MEDIAN, FAST_MEDIAN will return medians in the same
-%    datatype as the data passed in.  FAST_MEDIAN will work with any
-%    numeric type except int64.  The code has lines to handle int64 but 
-%    they are commented out as the C++ datatype for int64 is not standard
-%    between different compilers.  (GCC uses "long long" while VC uses 
-%    __int64.)  Note that for int types, FAST_MEDIAN does not round the
-%    result; it is simply floored as is typical for integer arithmetic. 
-%    This may result in FAST_MEDIAN differing in output from MEDIAN for
-%    some integer inputs.
+%    datatype as the data passed in. Note that for int types, FAST_MEDIAN 
+%    does not round the result; it is simply floored as is typical for 
+%    integer arithmetic.  This may result in FAST_MEDIAN differing in 
+%    output from MEDIAN for some integer inputs.
 %
 %    In contrast to MEDIAN, which attempts to return NaN for empty inputs,
 %    FAST_MEDIAN returns empty output of the proper datatype for empty
